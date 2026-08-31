@@ -1,5 +1,6 @@
 import os
 import json
+from datetime import datetime
 
 def add_expense(expenses):
     incorrect_amount = True
@@ -29,11 +30,13 @@ def add_expense(expenses):
         else:
             incorrect_description = False
     while incorrect_date:
-        date = input("Enter a date (DD:MM:YYYY): ")
-        if date.isdigit():
-            print("Please enter a valid string value!")
-        else:
-            incorrect_date = False 
+        date_string = input("Enter a date (YYYY-MM-DD): ")
+        try:
+            date = datetime.strptime(date_string, "%Y-%m-%d")
+            date = date.strftime("%Y-%m-%d")
+            incorrect_date = False
+        except ValueError:
+            print(f"Invalid date: {date_string}")
     print("Expense recorded successfully")
 
     expense_id += len(expenses) + 1
@@ -54,7 +57,6 @@ def view_expense(expenses):
 
 def delete_expense(expenses):
     invalid_expense = True
-    json_path = "expense.json"
     while invalid_expense:
         try:
             id = int(input("Enter an expense number to delete: "))
