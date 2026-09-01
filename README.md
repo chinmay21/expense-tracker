@@ -166,7 +166,6 @@ This project helped me practice several important Python concepts, including:
 
 Possible improvements for future versions include:
 
-* More robust date validation
 * Support for decimal amounts
 * Case-insensitive category searching
 * Editing existing expenses
